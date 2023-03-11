@@ -6,4 +6,16 @@ helm upgrade --install kubecost kubecost/cost-analyzer --namespace kubecost --cr
 kubectl apply -f simple-ingress.yaml
 
 # Deploy example resources for Kubecost to look at
-kubectl apply -f .\sample-apps.yaml --create-namespace
+kubectl apply -f .\sample-apps.yaml
+
+# Get the Kubecost URL(s)
+$kubecostJson = kubectl get svc kubecost -n kubecost -o json
+$kubecostConfig = $kubecostJson | ConvertFrom-Json
+
+If ($kubecostConfig.status.loadBalancer.ingress.ip) {
+    Write-Host ("Internal URL of Kubecost is http://" + $kubecostConfig.spec.clusterIP) -ForegroundColor Yellow
+}
+
+If ($kubecostConfig.status.loadBalancer.ingress.ip) {
+    Write-Host ("Public URL of Kubecost is http://" + $kubecostConfig.status.loadBalancer.ingress.ip) -ForegroundColor Yellow
+}
