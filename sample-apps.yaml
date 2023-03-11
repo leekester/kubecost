@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: guidewire
+  labels:
+    name: guidewire
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: billing
+  name: billing
+  namespace: guidewire
+spec:
+  containers:
+  - name: billing
+    image: httpd
+    resources:
+      requests:
+        memory: "60Mi"
+        cpu: "40m"
+      limits:
+        memory: "100Mi"
+        cpu: "100m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: claims
+  name: claims
+  namespace: guidewire
+spec:
+  containers:
+  - name: claims
+    image: httpd
+    resources:
+      requests:
+        memory: "60Mi"
+        cpu: "40m"
+      limits:
+        memory: "100Mi"
+        cpu: "100m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: policy
+  name: policy
+  namespace: guidewire
+spec:
+  containers:
+  - name: policy
+    image: httpd
+    resources:
+      requests:
+        memory: "60Mi"
+        cpu: "40m"
+      limits:
+        memory: "100Mi"
+        cpu: "100m"
