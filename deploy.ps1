@@ -15,9 +15,7 @@ az aks create `
   --name $clusterName `
   --node-vm-size $nodesize `
   --node-count $nodeCount `
-  --enable-blob-driver `
-  --network-plugin azure `
-  --network-plugin-mode overlay `
+  --network-plugin kubenet `
   --pod-cidr 192.168.0.0/16 `
   --zones 1 `
   --generate-ssh-keys
