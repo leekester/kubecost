@@ -9,6 +9,8 @@ kubectl apply -f simple-ingress.yaml
 kubectl apply -f .\sample-apps.yaml
 
 # Get the Kubecost URL(s)
+Write-Host "Waiting a few seconds for the kubecost service to be exposed.." -ForegroundColor Yellow
+Sleep 5
 $kubecostJson = kubectl get svc kubecost -n kubecost -o json
 $kubecostConfig = $kubecostJson | ConvertFrom-Json
 
